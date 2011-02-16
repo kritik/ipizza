@@ -19,3 +19,20 @@ seb:
   key_secret: foobar
   encoding: UTF-8
   snd_id: sender
+
+nordea:
+  payments_service_url: https://netbank.nordea.com/pnbepaytest/epayn.jsp
+  payments_return_url: http://test.local/nordea
+  payments_reject_url: http://test.local/nordea
+  payments_cancel_url: http://test.local/nordea
+  payment_rcv_id: '12345678'
+  payments_language: '4'
+  auth_service_url: https://netbank.nordea.com/pnbeidtest/eidn.jsp
+  auth_return_url: http://priit.local/info.rb
+  auth_reject_url: http://priit.local/info.rb
+  auth_cancel_url: http://priit.local/info.rb
+  auth_language: 'ET'
+  auth_rcv_id: '87654321'
+  confirm: 'YES'
+  keyvers: '0001'
+  file_key: ../certificates/nordea_test_priv

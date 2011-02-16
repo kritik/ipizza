@@ -40,8 +40,8 @@ module Ipizza::Provider
     end
     
     def payment_response(params)
-      response = Ipizza::PaymentResponse.new(params, Ipizza::Util::SAMPO)
-      response.verify(cert)
+      response = Ipizza::PaymentResponse.new(params)
+      response.verify(self.class.file_cert)
       
       return response
     end
