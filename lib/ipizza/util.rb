@@ -34,9 +34,9 @@ module Ipizza
 
         arr.each do |e|
           m = case m
-          when 7:
+          when 7
             3
-          when 3:
+          when 3
             1
           else
             7
