@@ -56,6 +56,7 @@ module Ipizza
           val = Iconv.conv(to_charset, from_charset, val)
           memo << func_p(val) << val
 	  @mac = memo
+	  memo
         end
       end
 
