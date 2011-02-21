@@ -5,7 +5,7 @@ require 'active_support/all'
 
 module Ipizza
   class Util
-    
+    attr_reader :mac    
     class << self
       
       def verify_signature(certificate_path, signature, data)
@@ -55,7 +55,7 @@ module Ipizza
           val = params[param].to_s
           val = Iconv.conv(to_charset, from_charset, val)
           memo << func_p(val) << val
-          memo
+	  @mac = memo
         end
       end
 
