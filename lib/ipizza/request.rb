@@ -4,9 +4,12 @@ module Ipizza
     attr_accessor :extra_params
     attr_accessor :sign_params
     attr_accessor :service_url
+    attr_accessor :mac
     
     def sign(privkey_path, privkey_secret, order, mac_param = 'VK_MAC')
-      signature = Ipizza::Util.sign(privkey_path, privkey_secret, Ipizza::Util.mac_data_string(sign_params, order))
+      util = Ipizza::Util
+      signature = util.sign(privkey_path, privkey_secret, util.mac_data_string(sign_params, order))
+      @mac = util.mac
       self.sign_params[mac_param] = signature
     end
     
