@@ -7,9 +7,8 @@ module Ipizza
     attr_accessor :mac
     
     def sign(privkey_path, privkey_secret, order, mac_param = 'VK_MAC')
-      util = Ipizza::Util.new
-      signature = util.sign(privkey_path, privkey_secret, util.mac_data_string(sign_params, order))
-      @mac = util.mac
+      @mac = Ipizza::Util.mac_data_string(sign_params, order)
+      signature = Ipizza::Util.sign(privkey_path, privkey_secret, Ipizza::Util.mac_data_string(sign_params, order))
       self.sign_params[mac_param] = signature
     end
     
