@@ -1,7 +1,6 @@
 require 'base64'
 require 'iconv'
 require 'openssl'
-require 'active_support/all'
 
 module Ipizza
   class Util
@@ -64,7 +63,7 @@ module Ipizza
 
       # p(x) is length of the field x represented by three digits
       def func_p(val)
-        sprintf("%03i", val.mb_chars.decompose.size)
+        sprintf("%03i", val.bytesize)
       end
     end
   end
