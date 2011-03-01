@@ -36,3 +36,8 @@ nordea:
   confirm: 'YES'
   keyvers: '0001'
   file_key: ../certificates/nordea_test_priv
+
+estcard:
+  id:""
+  file_cert: ../certificates/seb_test_pub.crt
+  file_key: ../certificates/dealer.key
