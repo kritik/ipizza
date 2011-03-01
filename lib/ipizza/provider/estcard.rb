@@ -12,7 +12,7 @@ module Ipizza::Provider
 	    req.sign_params = {
               'action' => action.to_s,
               "ver"  => '002',
-              "id" => "ggg",
+              "id" => self.class.id,
               "ecuno" => sprintf("%012s", 100000 + order_id),
               "eamount"=> payment.amount,
               "cur" => 'EUR',
@@ -37,9 +37,14 @@ module Ipizza::Provider
 
 	private
 	def generate_mac_string(fields)
+	    return '' unless fields.is_a?(Hash)
+	    temp = {}
+	    fields.each{|key,value| temp[key.to_s] = value.to_s }
+	    fields = temp
+	    
 	    result = '';
 	    if(fields["action"] == "gaf")
-	    result << fields["ver"]+fields["id"]+fields["ecuno"]+fields["eamount"]+fields["cur"]+fields["datetime"];
+	      result << fields["ver"]+fields["id"]+fields["ecuno"]+fields["eamount"]+fields["cur"]+fields["datetime"];
 	    elsif(fields["action"] == "afb")
 	    fields["ver"] = sprintf("%03s", fields['ver'])
 	    fields['eamount'] = sprintf("%012s", fields['eamount'])
