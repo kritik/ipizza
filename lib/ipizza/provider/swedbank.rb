@@ -22,7 +22,8 @@ module Ipizza::Provider
       req.extra_params = {
         'VK_CHARSET' => self.class.encoding,
         'VK_RETURN' => self.class.return_url,
-        'VK_CANCEL' => self.class.cancel_url
+        'VK_CANCEL' => self.class.cancel_url,
+        'bank_type' => 'swedbank'
       }
 
       param_order = ['VK_SERVICE', 'VK_VERSION', 'VK_SND_ID', 'VK_STAMP', 'VK_AMOUNT', 'VK_CURR', 'VK_REF', 'VK_MSG']
@@ -32,7 +33,7 @@ module Ipizza::Provider
     end
 
     def payment_response(params)
-      response = Ipizza::PaymentResponse.new(params)
+      response = Ipizza::PaymentResponse.new(params, {'bank_type'=>'swedbank'})
       response.verify(self.class.file_cert, self.class.encoding)
       return response
     end
@@ -51,7 +52,8 @@ module Ipizza::Provider
       }
 
       req.extra_params = {
-        'VK_ENCODING' => self.class.encoding
+        'VK_ENCODING' => self.class.encoding,
+	'bank_type' => 'swedbank'
       }
 
       param_order = ['VK_SERVICE', 'VK_VERSION', 'VK_SND_ID', 'VK_REPLY', 'VK_RETURN', 'VK_DATE', 'VK_TIME']
