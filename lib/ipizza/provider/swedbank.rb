@@ -33,8 +33,8 @@ module Ipizza::Provider
     end
 
     def payment_response(params)
-      response = Ipizza::PaymentResponse.new(params,{'bank_type' => 'swedbank'})
-      response.verify(self.class.file_cert, self.class.encoding)
+      response = Ipizza::PaymentResponse.new(params)
+      response.verify(self.class.file_cert, self.class.encoding, {'bank_type' => 'swedbank'})
       return response
     end
 
