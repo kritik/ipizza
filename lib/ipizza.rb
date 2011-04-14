@@ -11,4 +11,5 @@ require 'ipizza/provider/swedbank'
 require 'ipizza/provider/seb'
 require 'ipizza/provider/sampo'
 require 'ipizza/provider/nordea'
+require 'ipizza/provider/estcard'
 
