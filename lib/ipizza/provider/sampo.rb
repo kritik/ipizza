@@ -42,7 +42,7 @@ module Ipizza::Provider
     
     def payment_response(params)
       response = Ipizza::PaymentResponse.new(params)
-      response.verify(self.class.file_cert)
+      response.verify(self.class.file_cert, "ISO-8859-1", "ISO-8859-1")
       
       return response
     end

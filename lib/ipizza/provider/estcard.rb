@@ -36,15 +36,15 @@ module Ipizza::Provider
           #http://zorro.ee:3000/bank/estcard/return?action=afb&ver=2&id=Progroup&ecuno=100049&receipt_no=00245&eamount=50&cur=EUR&respcode=000&datetime=20110412180817&msgdata=Vladimir&actiontext=OK%2C+approved&mac=5497715417E60AF190D0A1FDDE94ECF3464596EF5B1B7287D4FABBC670CBA2219EC490D504DAF4317814DD3678A1FD8E71DA86F51C8A6D4309356EFDFE090162697E3D27B51F09ED4570F69F0A7C46C5DFC3AB663A3965D3DF466EEB222854EE0C6BD9019DE532DF9C24D4A6A3E10A3AD4F580C046D74D88D7A5650C3C317B4B
 	    params["action"] = "afb"
             response = Ipizza::PaymentResponse.new(params)
-            #response.mac = generate_mac_string(params)
 	    @mac = generate_mac_string(params)
             response.mac = @mac
+            
             #verifying
             certificate = OpenSSL::PKey::RSA.new(File.read(self.class.file_cert).gsub(/  /, '')).public_key
             return response unless params["respcode"].eql?("000")
+            return response unless params["id"].to_s.eql?(self.class.id.to_s)
             
             response.valid = certificate.verify(OpenSSL::Digest::SHA1.new, [params["mac"]].pack('H*'), response.mac)
-	    
 	    return response
 	end
 
